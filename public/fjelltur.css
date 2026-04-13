@@ -1,0 +1,488 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ─── HEADER / NAV ─────────────────────────────────────────────── */
+header {
+  background-color: #2e7d32;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+header h1 {
+  color: white;
+  font-size: 1.5rem;
+}
+
+nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  padding: 0.5rem 1rem;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+  position: relative;
+}
+
+.nav-btn:hover, .nav-btn.active {
+  background: rgba(255,255,255,0.3);
+}
+
+.logout-btn {
+  background: rgba(255,80,80,0.25);
+}
+
+/* ─── BADGE ────────────────────────────────────────────────────── */
+.badge {
+  background: #ff5252;
+  color: white;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  padding: 1px 6px;
+  margin-left: 4px;
+  font-weight: bold;
+}
+
+.hidden { display: none; }
+
+/* ─── FANER ────────────────────────────────────────────────────── */
+.fane {
+  display: none;
+  padding: 1.5rem;
+  flex: 1;
+}
+
+.fane.aktiv {
+  display: block;
+}
+
+/* ─── KORT-GRID ────────────────────────────────────────────────── */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  display: inline-flex;
+  flex-direction: column;
+  width: 280px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  gap: 7px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.height {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.area {
+  font-weight: bold;
+  color: #555;
+  font-size: 0.85rem;
+}
+
+.date {
+  font-size: 12px;
+  color: #999;
+}
+
+.desc {
+  font-size: 13px;
+  color: #444;
+}
+
+.venn-etikett {
+  font-size: 13px;
+  font-weight: bold;
+  color: #2e7d32;
+  background: #e8f5e9;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+/* ─── VENNER-ADMIN ─────────────────────────────────────────────── */
+.venner-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  max-width: 900px;
+}
+
+.venner-seksjon {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  min-width: 260px;
+  flex: 1;
+}
+
+.venner-seksjon h2 {
+  font-size: 1rem;
+  color: #2e7d32;
+  margin-bottom: 0.75rem;
+  border-bottom: 2px solid #e8f5e9;
+  padding-bottom: 0.4rem;
+}
+
+.søk-rad {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.søk-rad input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.venn-rad {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 0.5rem;
+}
+
+.venn-rad:last-child { border-bottom: none; }
+
+.venn-navn {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.venn-knapper {
+  display: flex;
+  gap: 0.4rem;
+}
+
+button {
+  padding: 0.4rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: opacity 0.15s;
+}
+
+button:disabled { opacity: 0.5; cursor: default; }
+
+.btn-aksepter {
+  background: #2e7d32;
+  color: white;
+}
+
+.btn-avvis {
+  background: #e53935;
+  color: white;
+}
+
+.btn-legg-til {
+  background: #1565c0;
+  color: white;
+}
+
+.btn-sendt {
+  background: #aaa;
+  color: white;
+}
+
+.ingen, .laster {
+  color: #888;
+  font-size: 0.9rem;
+  padding: 0.5rem 0;
+}
+
+.ingen-turer {
+  color: #888;
+  padding: 1.5rem;
+  font-size: 1rem;
+}
+
+.feil {
+  color: #c62828;
+  font-size: 0.9rem;
+}
+
+/* ─── LOGIN ─────────────────────────────────────────────────────── */
+select, input {
+  padding: 0.5rem;
+  margin: 0.2rem;
+  font-size: 1rem;
+}
+
+#loginForm { display: block; }
+#registerForm { display: none; }
+
+.loginRegBtn {
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: lightgrey;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 1em;
+}
+
+/* ─── NYTT FJELL SKJEMA ──────────────────────────────────────────── */
+.skjema-wrapper {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.skjema-wrapper h2 {
+  font-size: 1.2rem;
+  color: #2e7d32;
+  margin-bottom: 1.25rem;
+  border-bottom: 2px solid #e8f5e9;
+  padding-bottom: 0.5rem;
+}
+
+.skjema-gruppe {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 1rem;
+}
+
+.skjema-gruppe label {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #444;
+}
+
+.skjema-gruppe input,
+.skjema-gruppe select,
+.skjema-gruppe textarea {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.skjema-gruppe input:focus,
+.skjema-gruppe select:focus,
+.skjema-gruppe textarea:focus {
+  outline: none;
+  border-color: #2e7d32;
+}
+
+.skjema-gruppe textarea {
+  resize: vertical;
+}
+
+.btn-lagre {
+  background: #2e7d32;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: 7px;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.btn-lagre:hover {
+  background: #1b5e20;
+}
+
+.skjema-melding {
+  padding: 0.65rem 1rem;
+  border-radius: 7px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.skjema-melding.suksess {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #a5d6a7;
+}
+
+.skjema-melding.feil {
+  background: #ffebee;
+  color: #b71c1c;
+  border: 1px solid #ef9a9a;
+}
+
+/* ─── NYTT OMRÅDE ────────────────────────────────────────────────── */
+.omraade-rad {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.omraade-rad select {
+  flex: 1;
+}
+
+.btn-nytt-omraade {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+  border-radius: 7px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.btn-nytt-omraade:hover {
+  background: #c8e6c9;
+}
+
+#nytt-omraade-felt {
+  flex-direction: column;
+  gap: 0.4rem;
+  background: #f9fbe7;
+  border: 1px solid #dcedc8;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.btn-lagre-omraade {
+  background: #558b2f;
+  color: white;
+  padding: 0.45rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  align-self: flex-start;
+}
+
+.btn-lagre-omraade:hover {
+  background: #33691e;
+}
+
+/* ─── LOGG TUR KNAPP PÅ KORT ────────────────────────────────────── */
+.btn-logg-tur {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+  border-radius: 6px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  margin-top: 4px;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-logg-tur:hover {
+  background: #c8e6c9;
+}
+
+/* ─── MODAL ──────────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-overlay.hidden {
+  display: none;
+}
+
+.modal {
+  background: white;
+  border-radius: 14px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.modal h2 {
+  font-size: 1.1rem;
+  color: #2e7d32;
+  margin-bottom: 0.25rem;
+}
+
+.modal-fjellnavn {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.modal-lukk {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #888;
+  padding: 0.2rem 0.5rem;
+}
+
+.modal-lukk:hover {
+  color: #333;
+}

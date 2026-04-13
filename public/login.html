@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./fjelltur.css">
+</head>
+<body>
+    <h1>Login</h1>
+    <form id="loginForm" action='/login' method="POST">
+        <label for="username">Username:</label>
+        <input type="text" name="username">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" name="password">
+
+    
+        
+        <br><br>
+        <button type="submit" name="login">Login</button>
+    </form>
+
+    <h2 id="loginFeedback"></h2>
+    <form id = "registerForm" action='/register' method="POST">
+        <label for="username">Username:</label>
+        <input type="text" name="username">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" name="password">
+        <br>
+  
+
+        <br>
+        <label for="epost">Epost:</label>
+        <input type="mail" name="epost">
+        <br>
+        <label for="mobile">Mobil:</label>
+        <input type="text" name="mobile">
+        <br>
+
+
+        <button type="submit" name="login">Register</button>
+    </form>
+    <div>
+      <button class = "loginRegBtn" id="btnLogin">Login</button>
+      <button class = "loginRegBtn" id="btnRegister">Register</button>
+  </div>
+
+</body>
+</html>
