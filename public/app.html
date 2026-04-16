@@ -7,131 +7,153 @@
   <link rel="stylesheet" href="./fjelltur.css">
 </head>
 <body>
+
   <header>
-    <h1>🏔 Fjelltur</h1>
+    <div class="header-brand">
+      <svg class="header-logo" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 24 L9 8 L13 15 L18 9 L24 24 Z" fill="none" stroke="rgba(154,184,144,0.85)" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M9 8 L13 15 L18 9" fill="none" stroke="#6fa05e" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+      <h1>Fjelltur</h1>
+    </div>
     <nav>
       <button class="nav-btn active" onclick="visFane('mine-turer')">Mine turer</button>
       <button class="nav-btn" onclick="visFane('venner-turer')">Venners turer</button>
       <button class="nav-btn" onclick="visFane('venner-admin')">
         Venner <span id="forespørsel-badge" class="badge hidden">0</span>
       </button>
-      <button class="nav-btn" onclick="visFane('logg-tur')">+ Logg tur</button>
-      <button class="nav-btn" onclick="visFane('legg-til-fjell')">+ Nytt fjell</button>
-      <button class="nav-btn logout-btn" onclick="window.location='/logout'">Logg ut</button>
+      <button class="nav-btn nav-plus" onclick="visFane('logg-tur')">+ Logg tur</button>
+      <button class="nav-btn nav-plus" onclick="visFane('legg-til-fjell')">+ Nytt fjell</button>
+      <button class="nav-btn nav-logout" onclick="window.location='/logout'">Logg ut</button>
     </nav>
   </header>
 
-  <div id="mine-turer" class="fane aktiv">
-    <div id="main" class="card-grid"></div>
-  </div>
+  <main>
 
-  <div id="venner-turer" class="fane">
-    <div id="venner-turer-grid" class="card-grid"></div>
-  </div>
-
-  <div id="venner-admin" class="fane">
-    <div class="venner-layout">
-      <section class="venner-seksjon">
-        <h2>Legg til venn</h2>
-        <div class="søk-rad">
-          <input type="text" id="søk-input" placeholder="Søk etter brukernavn…" oninput="søkBrukere()">
-        </div>
-        <div id="søk-resultater"></div>
-      </section>
-      <section class="venner-seksjon">
-        <h2>Innkommende forespørsler</h2>
-        <div id="forespørsel-liste"></div>
-      </section>
-      <section class="venner-seksjon">
-        <h2>Mine venner</h2>
-        <div id="venn-liste"></div>
-      </section>
+    <div id="mine-turer" class="fane aktiv">
+      <div class="fane-header">
+        <h2 class="fane-tittel">Mine turer</h2>
+        <span class="fane-sub">Dine registrerte toppturer</span>
+      </div>
+      <div id="main" class="card-grid"></div>
     </div>
-  </div>
 
-  <!-- LOGG TUR -->
-  <div id="logg-tur" class="fane">
-    <div class="skjema-wrapper">
-      <h2>📋 Logg en tur</h2>
-      <div id="tur-melding" class="skjema-melding hidden"></div>
-
-      <div class="skjema-gruppe">
-        <label for="tur-fjell">Fjell</label>
-        <div class="omraade-rad">
-          <select id="tur-fjell">
-            <option value="">Velg fjell…</option>
-          </select>
-          <button type="button" class="btn-nytt-omraade" onclick="visFane('legg-til-fjell')">+ Nytt fjell</button>
-        </div>
+    <div id="venner-turer" class="fane">
+      <div class="fane-header">
+        <h2 class="fane-tittel">Venners turer</h2>
+        <span class="fane-sub">Hva vennene dine har besteg</span>
       </div>
-
-      <div class="skjema-gruppe">
-        <label for="tur-dato">Dato</label>
-        <input type="date" id="tur-dato">
-      </div>
-
-      <div class="skjema-gruppe">
-        <label for="tur-varighet">Varighet (minutter)</label>
-        <input type="number" id="tur-varighet" placeholder="F.eks. 180" min="1">
-      </div>
-
-      <div class="skjema-gruppe">
-        <label for="tur-beskrivelse">Notat / beskrivelse</label>
-        <textarea id="tur-beskrivelse" rows="3" placeholder="Hvordan var turen?"></textarea>
-      </div>
-
-      <button class="btn-lagre" onclick="lagreNyTur()">💾 Logg tur</button>
+      <div id="venner-turer-grid" class="card-grid"></div>
     </div>
-  </div>
 
-  <!-- LEGG TIL FJELL -->
-  <div id="legg-til-fjell" class="fane">
-    <div class="skjema-wrapper">
-      <h2>Legg til nytt fjell</h2>
-      <div id="fjell-melding" class="skjema-melding hidden"></div>
-
-      <div class="skjema-gruppe">
-        <label for="fjell-navn">Fjellnavn</label>
-        <input type="text" id="fjell-navn" placeholder="F.eks. Galdhøpiggen">
+    <div id="venner-admin" class="fane">
+      <div class="fane-header">
+        <h2 class="fane-tittel">Venner</h2>
       </div>
-      <div class="skjema-gruppe">
-        <label for="fjell-hoyde">Høyde (moh)</label>
-        <input type="number" id="fjell-hoyde" placeholder="F.eks. 2469" min="0" max="9000">
+      <div class="venner-layout">
+        <section class="venner-seksjon">
+          <h3>Finn venner</h3>
+          <div class="søk-rad">
+            <input type="text" id="søk-input" placeholder="Søk etter brukernavn…" oninput="søkBrukere()">
+          </div>
+          <div id="søk-resultater"></div>
+        </section>
+        <section class="venner-seksjon">
+          <h3>Forespørsler</h3>
+          <div id="forespørsel-liste"></div>
+        </section>
+        <section class="venner-seksjon">
+          <h3>Mine venner</h3>
+          <div id="venn-liste"></div>
+        </section>
       </div>
-      <div class="skjema-gruppe">
-        <label for="fjell-omraade">Område</label>
-        <div class="omraade-rad">
-          <select id="fjell-omraade">
-            <option value="">Velg område…</option>
-          </select>
-          <button type="button" class="btn-nytt-omraade" onclick="toggleNyttOmraade()">+ Nytt</button>
-        </div>
-        <div id="nytt-omraade-felt" style="margin-top:0.5rem; display:none;">
-          <input type="text" id="nytt-omraade-navn" placeholder="Navn på nytt område">
-          <textarea id="nytt-omraade-beskrivelse" rows="2" placeholder="Beskrivelse (valgfritt)" style="margin-top:0.4rem;"></textarea>
-          <button type="button" class="btn-lagre-omraade" onclick="lagreNyttOmraade()">Lagre område</button>
-        </div>
-      </div>
-      <div class="skjema-gruppe">
-        <label for="fjell-beskrivelse">Beskrivelse</label>
-        <textarea id="fjell-beskrivelse" rows="3" placeholder="Beskriv fjellet…"></textarea>
-      </div>
-      <div class="skjema-gruppe">
-        <label for="fjell-foto">Filnavn på bilde (valgfritt)</label>
-        <input type="text" id="fjell-foto" placeholder="F.eks. galdhøpiggen.jpg">
-      </div>
-      <button class="btn-lagre" onclick="lagreNyttFjell()">💾 Lagre fjell</button>
     </div>
-  </div>
 
-  <!-- MODAL for rask turlogging fra kort -->
+    <div id="logg-tur" class="fane">
+      <div class="fane-header">
+        <h2 class="fane-tittel">Logg en tur</h2>
+      </div>
+      <div class="skjema-wrapper">
+        <div id="tur-melding" class="skjema-melding hidden"></div>
+        <div class="skjema-gruppe">
+          <label for="tur-fjell">Fjell</label>
+          <div class="omraade-rad">
+            <select id="tur-fjell">
+              <option value="">Velg fjell…</option>
+            </select>
+            <button type="button" class="btn-nytt-omraade" onclick="visFane('legg-til-fjell')">+ Nytt fjell</button>
+          </div>
+        </div>
+        <div class="skjema-gruppe">
+          <label for="tur-dato">Dato</label>
+          <input type="date" id="tur-dato">
+        </div>
+        <div class="skjema-gruppe">
+          <label for="tur-varighet">Varighet (minutter)</label>
+          <input type="number" id="tur-varighet" placeholder="F.eks. 180" min="1">
+        </div>
+        <div class="skjema-gruppe">
+          <label for="tur-beskrivelse">Notat / beskrivelse</label>
+          <textarea id="tur-beskrivelse" rows="3" placeholder="Hvordan var turen?"></textarea>
+        </div>
+        <button class="btn-lagre" onclick="lagreNyTur()">Logg tur</button>
+      </div>
+    </div>
+
+    <div id="legg-til-fjell" class="fane">
+      <div class="fane-header">
+        <h2 class="fane-tittel">Legg til fjell</h2>
+      </div>
+      <div class="skjema-wrapper">
+        <div id="fjell-melding" class="skjema-melding hidden"></div>
+        <div class="skjema-gruppe">
+          <label for="fjell-navn">Fjellnavn</label>
+          <input type="text" id="fjell-navn" placeholder="F.eks. Galdhøpiggen">
+        </div>
+        <div class="skjema-gruppe">
+          <label for="fjell-hoyde">Høyde (moh)</label>
+          <input type="number" id="fjell-hoyde" placeholder="F.eks. 2469" min="0" max="9000">
+        </div>
+        <div class="skjema-gruppe">
+          <label for="fjell-omraade">Område</label>
+          <div class="omraade-rad">
+            <select id="fjell-omraade">
+              <option value="">Velg område…</option>
+            </select>
+            <button type="button" class="btn-nytt-omraade" onclick="toggleNyttOmraade()">+ Nytt</button>
+          </div>
+          <div id="nytt-omraade-felt" style="margin-top:0.5rem; display:none;">
+            <input type="text" id="nytt-omraade-navn" placeholder="Navn på nytt område">
+            <textarea id="nytt-omraade-beskrivelse" rows="2" placeholder="Beskrivelse (valgfritt)"></textarea>
+            <button type="button" class="btn-lagre-omraade" onclick="lagreNyttOmraade()">Lagre område</button>
+          </div>
+        </div>
+        <div class="skjema-gruppe">
+          <label for="fjell-beskrivelse">Beskrivelse</label>
+          <textarea id="fjell-beskrivelse" rows="3" placeholder="Beskriv fjellet…"></textarea>
+        </div>
+        <div class="skjema-gruppe">
+          <label for="fjell-foto">Bilde (filnavn, valgfritt)</label>
+          <input type="text" id="fjell-foto" placeholder="F.eks. galdhøpiggen.jpg">
+        </div>
+        <button class="btn-lagre" onclick="lagreNyttFjell()">Lagre fjell</button>
+      </div>
+
+      <div class="fane-header" style="margin-top:2rem;">
+        <h2 class="fane-tittel">Eksisterende fjell</h2>
+      </div>
+      <div id="fjell-liste-container" class="venn-liste"></div>
+    </div>
+
+  </main>
+
+  <!-- Logg tur modal -->
   <div id="modal-overlay" class="modal-overlay hidden" onclick="lukkModal()">
     <div class="modal" onclick="event.stopPropagation()">
       <button class="modal-lukk" onclick="lukkModal()">✕</button>
-      <h2>📋 Logg tur</h2>
+      <h2>Logg tur</h2>
       <p id="modal-fjellnavn" class="modal-fjellnavn"></p>
       <div id="modal-melding" class="skjema-melding hidden"></div>
-
       <div class="skjema-gruppe">
         <label for="modal-dato">Dato</label>
         <input type="date" id="modal-dato">
@@ -144,7 +166,63 @@
         <label for="modal-beskrivelse">Notat</label>
         <textarea id="modal-beskrivelse" rows="3" placeholder="Hvordan var turen?"></textarea>
       </div>
-      <button class="btn-lagre" onclick="lagreModalTur()">💾 Logg tur</button>
+      <button class="btn-lagre" onclick="lagreModalTur()">Logg tur</button>
+    </div>
+  </div>
+
+  <!-- Rediger tur modal -->
+  <div id="rediger-tur-overlay" class="modal-overlay hidden" onclick="lukkRedigerTur()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-lukk" onclick="lukkRedigerTur()">✕</button>
+      <h2>✏️ Rediger tur</h2>
+      <div id="rediger-tur-melding" class="skjema-melding hidden"></div>
+      <div class="skjema-gruppe">
+        <label for="rediger-tur-fjell">Fjell</label>
+        <select id="rediger-tur-fjell"></select>
+      </div>
+      <div class="skjema-gruppe">
+        <label for="rediger-tur-dato">Dato</label>
+        <input type="date" id="rediger-tur-dato">
+      </div>
+      <div class="skjema-gruppe">
+        <label for="rediger-tur-varighet">Varighet (minutter)</label>
+        <input type="number" id="rediger-tur-varighet" placeholder="F.eks. 180" min="1">
+      </div>
+      <div class="skjema-gruppe">
+        <label for="rediger-tur-beskrivelse">Notat</label>
+        <textarea id="rediger-tur-beskrivelse" rows="3"></textarea>
+      </div>
+      <button class="btn-lagre" onclick="lagreRedigertTur()">Lagre endringer</button>
+    </div>
+  </div>
+
+  <!-- Rediger fjell modal -->
+  <div id="rediger-fjell-overlay" class="modal-overlay hidden" onclick="lukkRedigerFjell()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-lukk" onclick="lukkRedigerFjell()">✕</button>
+      <h2>✏️ Rediger fjell</h2>
+      <div id="rediger-fjell-melding" class="skjema-melding hidden"></div>
+      <div class="skjema-gruppe">
+        <label for="rediger-fjell-navn">Fjellnavn</label>
+        <input type="text" id="rediger-fjell-navn">
+      </div>
+      <div class="skjema-gruppe">
+        <label for="rediger-fjell-hoyde">Høyde (moh)</label>
+        <input type="number" id="rediger-fjell-hoyde" min="0" max="9000">
+      </div>
+      <div class="skjema-gruppe">
+        <label for="rediger-fjell-omraade">Område</label>
+        <select id="rediger-fjell-omraade"></select>
+      </div>
+      <div class="skjema-gruppe">
+        <label for="rediger-fjell-beskrivelse">Beskrivelse</label>
+        <textarea id="rediger-fjell-beskrivelse" rows="3"></textarea>
+      </div>
+      <div class="skjema-gruppe">
+        <label for="rediger-fjell-foto">Bilde (filnavn)</label>
+        <input type="text" id="rediger-fjell-foto">
+      </div>
+      <button class="btn-lagre" onclick="lagreRedigertFjell()">Lagre endringer</button>
     </div>
   </div>
 

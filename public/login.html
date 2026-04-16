@@ -1,53 +1,226 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="no">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="./fjelltur.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fjelltur</title>
+  <link rel="stylesheet" href="./fjelltur.css">
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      padding: 2rem 1rem;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .login-brand {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .login-brand-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(61,94,53,0.2);
+      border-radius: 14px;
+      border: 1px solid rgba(79,115,68,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .login-brand h1 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--snow);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.3rem;
+    }
+
+    .login-brand p {
+      font-size: 0.82rem;
+      color: var(--text-2);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .tab-row {
+      display: flex;
+      background: var(--bg2);
+      border-radius: 10px;
+      padding: 3px;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.55rem;
+      border: none;
+      background: none;
+      color: var(--text-2);
+      font-family: var(--font);
+      font-size: 0.88rem;
+      font-weight: 400;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .tab-btn.active {
+      background: var(--moss);
+      color: var(--snow);
+      font-weight: 600;
+    }
+
+    .form-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 1.75rem;
+    }
+
+    .field {
+      margin-bottom: 1rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.73rem;
+      font-weight: 600;
+      color: var(--text-2);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.45rem;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 0.72rem 0.9rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      color: var(--snow);
+      font-family: var(--font);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .field input:focus {
+      border-color: var(--lichen);
+      background: var(--bg4);
+    }
+
+    .field input::placeholder { color: var(--text-3); }
+
+    .submit-btn {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 0.5rem;
+      background: var(--moss);
+      border: none;
+      border-radius: var(--r-sm);
+      color: var(--snow);
+      font-family: var(--font);
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      letter-spacing: 0.02em;
+    }
+
+    .submit-btn:hover { background: var(--lichen); }
+    .submit-btn:active { transform: scale(0.99); }
+
+    .form-panel { display: none; }
+    .form-panel.active { display: block; }
+
+    #loginFeedback {
+      margin-top: 0.9rem;
+      padding: 0.6rem 0.9rem;
+      border-radius: var(--r-sm);
+      font-size: 0.84rem;
+      background: rgba(192,122,64,0.12);
+      border: 1px solid rgba(192,122,64,0.25);
+      color: #d4946a;
+      display: none;
+    }
+
+    #loginFeedback:not(:empty) { display: block; }
+  </style>
 </head>
 <body>
-    <h1>Login</h1>
-    <form id="loginForm" action='/login' method="POST">
-        <label for="username">Username:</label>
-        <input type="text" name="username">
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" name="password">
 
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="login-brand-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 26 L10 7 L14 16 L19 9 L26 26 Z" fill="none" stroke="rgba(154,184,144,0.85)" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M10 7 L14 16 L19 9" fill="none" stroke="#6fa05e" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h1>Fjelltur</h1>
+      <p>Logg toppturer med venner</p>
+    </div>
 
+    <div class="tab-row">
+      <button class="tab-btn active" id="btnLogin" onclick="visFane('login')">Logg inn</button>
+      <button class="tab-btn" id="btnRegister" onclick="visFane('register')">Registrer</button>
+    </div>
 
-        <br><br>
-        <button type="submit" name="login">Login</button>
-    </form>
+    <div class="form-box">
+      <form id="loginForm" class="form-panel active" action="/login" method="POST">
+        <div class="field">
+          <label>Brukernavn</label>
+          <input type="text" name="username" placeholder="Ditt brukernavn" autocomplete="username">
+        </div>
+        <div class="field">
+          <label>Passord</label>
+          <input type="password" name="password" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <button type="submit" class="submit-btn">Logg inn</button>
+      </form>
 
-    <h2 id="loginFeedback"></h2>
-    <form id = "registerForm" action='/register' method="POST">
-        <label for="username">Username:</label>
-        <input type="text" name="username">
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" name="password">
-        <br>
+      <form id="registerForm" class="form-panel" action="/register" method="POST">
+        <div class="field">
+          <label>Brukernavn</label>
+          <input type="text" name="username" placeholder="Velg brukernavn" autocomplete="username">
+        </div>
+        <div class="field">
+          <label>Passord</label>
+          <input type="password" name="password" placeholder="••••••••" autocomplete="new-password">
+        </div>
+        <div class="field">
+          <label>E-post</label>
+          <input type="email" name="epost" placeholder="din@epost.no" autocomplete="email">
+        </div>
+        <div class="field">
+          <label>Mobil</label>
+          <input type="tel" name="mobile" placeholder="+47 000 00 000" autocomplete="tel">
+        </div>
+        <button type="submit" class="submit-btn">Opprett konto</button>
+      </form>
 
-
-        <br>
-        <label for="epost">Epost:</label>
-        <input type="mail" name="epost">
-        <br>
-        <label for="mobile">Mobil:</label>
-        <input type="text" name="mobile">
-        <br>
-
-
-        <button type="submit" name="login">Register</button>
-    </form>
-    <div>
-      <button class = "loginRegBtn" id="btnLogin">Login</button>
-      <button class = "loginRegBtn" id="btnRegister">Register</button>
+      <div id="loginFeedback"></div>
+    </div>
   </div>
 
-
-
+  <script>
+    function visFane(fane) {
+      document.getElementById('loginForm').classList.toggle('active', fane === 'login');
+      document.getElementById('registerForm').classList.toggle('active', fane === 'register');
+      document.getElementById('btnLogin').classList.toggle('active', fane === 'login');
+      document.getElementById('btnRegister').classList.toggle('active', fane === 'register');
+    }
+  </script>
 </body>
 </html>

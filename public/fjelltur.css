@@ -1,488 +1,769 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ─── RESET ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── DESIGN TOKENS ─────────────────────────────────────────────────────────── */
+:root {
+  --bg:        #0f1510;
+  --bg2:       #181e18;
+  --bg3:       #222922;
+  --bg4:       #2c342c;
+  --border:    rgba(255,255,255,0.08);
+  --border2:   rgba(255,255,255,0.13);
+  --moss:      #3d5e35;
+  --lichen:    #4f7344;
+  --fern:      #6fa05e;
+  --mist:      #9ab890;
+  --peak:      #d4e4ce;
+  --snow:      #edf4eb;
+  --rust:      #b06030;
+  --amber:     #c07a40;
+  --red:       #c04040;
+  --red-soft:  rgba(180,50,50,0.2);
+  --blue-soft: rgba(40,80,150,0.25);
+  --blue-text: #7aaad4;
+
+  --text-1: #edf4eb;
+  --text-2: #9ab890;
+  --text-3: rgba(154,184,144,0.5);
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ─── BASE ───────────────────────────────────────────────────────────────────── */
+html, body {
+  height: 100%;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f4f0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-1);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ─── HEADER / NAV ─────────────────────────────────────────────── */
+/* ─── HIDDEN ─────────────────────────────────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ─── HEADER ─────────────────────────────────────────────────────────────────── */
 header {
-  background-color: #2e7d32;
-  padding: 1rem 1.5rem;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-shrink: 0;
+}
+
+.header-logo {
+  width: 26px;
+  height: 26px;
 }
 
 header h1 {
-  color: white;
-  font-size: 1.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--snow);
+  letter-spacing: -0.01em;
 }
 
 nav {
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 3px;
   flex-wrap: wrap;
 }
 
+/* ─── NAV BUTTONS ────────────────────────────────────────────────────────────── */
 .nav-btn {
-  padding: 0.5rem 1rem;
-  background: rgba(255,255,255,0.15);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 6px;
+  padding: 0.42rem 0.85rem;
+  background: transparent;
+  color: var(--text-2);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: background 0.2s;
+  font-family: var(--font);
+  font-size: 0.83rem;
+  font-weight: 400;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  white-space: nowrap;
   position: relative;
 }
 
-.nav-btn:hover, .nav-btn.active {
-  background: rgba(255,255,255,0.3);
+.nav-btn:hover {
+  background: rgba(255,255,255,0.06);
+  color: var(--snow);
 }
 
-.logout-btn {
-  background: rgba(255,80,80,0.25);
+.nav-btn.active {
+  background: rgba(61,94,53,0.4);
+  color: var(--snow);
+  border-color: rgba(79,115,68,0.5);
+  font-weight: 500;
 }
 
-/* ─── BADGE ────────────────────────────────────────────────────── */
+.nav-plus {
+  background: rgba(61,94,53,0.2);
+  color: var(--fern);
+  border-color: rgba(79,115,68,0.3);
+}
+
+.nav-plus:hover {
+  background: rgba(61,94,53,0.45);
+  color: var(--snow);
+}
+
+.nav-logout {
+  color: rgba(192,122,64,0.8);
+}
+
+.nav-logout:hover {
+  background: rgba(192,122,64,0.1);
+  color: var(--amber);
+}
+
+/* ─── BADGE ──────────────────────────────────────────────────────────────────── */
 .badge {
-  background: #ff5252;
+  display: inline-block;
+  background: var(--red);
   color: white;
   border-radius: 10px;
-  font-size: 0.7rem;
-  padding: 1px 6px;
-  margin-left: 4px;
-  font-weight: bold;
+  font-size: 0.68rem;
+  padding: 1px 5px;
+  margin-left: 3px;
+  font-weight: 700;
+  line-height: 1.4;
+  vertical-align: middle;
 }
 
-.hidden { display: none; }
+/* ─── MAIN & FANER ───────────────────────────────────────────────────────────── */
+main {
+  flex: 1;
+}
 
-/* ─── FANER ────────────────────────────────────────────────────── */
 .fane {
   display: none;
-  padding: 1.5rem;
-  flex: 1;
+  padding: 2rem 1.75rem;
 }
 
 .fane.aktiv {
   display: block;
 }
 
-/* ─── KORT-GRID ────────────────────────────────────────────────── */
+/* ─── FANE HEADER ────────────────────────────────────────────────────────────── */
+.fane-header {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.fane-tittel {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--snow);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.2rem;
+}
+
+.fane-sub {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  font-weight: 400;
+}
+
+/* ─── CARD GRID ──────────────────────────────────────────────────────────────── */
 .card-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 16px;
 }
 
+/* ─── CARD ───────────────────────────────────────────────────────────────────── */
 .card {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  width: 280px;
-  background: white;
-  border-radius: 12px;
+  width: 264px;
+  background: var(--bg2);
+  border-radius: var(--r-lg);
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+  border: 1px solid var(--border);
+  transition: transform 0.18s ease, border-color 0.18s, box-shadow 0.18s;
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
+  border-color: var(--border2);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.45);
 }
 
 .card img {
   width: 100%;
-  height: 180px;
+  height: 165px;
   object-fit: cover;
+  display: block;
+}
+
+.card-img-placeholder {
+  width: 100%;
+  height: 165px;
+  background: var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-content {
   display: flex;
   flex-direction: column;
-  padding: 14px;
-  gap: 7px;
+  padding: 14px 15px;
+  gap: 5px;
+  flex: 1;
 }
 
-.header {
+.card-header-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 8px;
 }
 
-.height {
-  background: #e8f5e9;
-  color: #2e7d32;
+.card-name {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--snow);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.height-badge {
+  background: rgba(61,94,53,0.35);
+  color: var(--fern);
   padding: 3px 8px;
   border-radius: 6px;
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid rgba(79,115,68,0.3);
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
 }
 
-.area {
-  font-weight: bold;
-  color: #555;
-  font-size: 0.85rem;
+.area-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-2);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.date {
-  font-size: 12px;
-  color: #999;
+.date-label {
+  font-size: 0.76rem;
+  color: var(--text-3);
 }
 
-.desc {
-  font-size: 13px;
-  color: #444;
+.desc-text {
+  font-size: 0.82rem;
+  color: rgba(212,228,206,0.6);
+  line-height: 1.45;
+  font-style: italic;
 }
 
 .venn-etikett {
-  font-size: 13px;
-  font-weight: bold;
-  color: #2e7d32;
-  background: #e8f5e9;
-  padding: 4px 8px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--fern);
+  background: rgba(61,94,53,0.25);
+  padding: 3px 8px;
   border-radius: 6px;
+  align-self: flex-start;
+  border: 1px solid rgba(79,115,68,0.2);
+  letter-spacing: 0.02em;
 }
 
-/* ─── VENNER-ADMIN ─────────────────────────────────────────────── */
+/* ─── LOGG TUR BUTTON ON CARD ────────────────────────────────────────────────── */
+.btn-logg-tur {
+  background: rgba(61,94,53,0.25);
+  color: var(--fern);
+  border: 1px solid rgba(79,115,68,0.3);
+  border-radius: var(--r-sm);
+  padding: 0.42rem 0.75rem;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 7px;
+  width: 100%;
+  text-align: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-logg-tur:hover {
+  background: rgba(61,94,53,0.5);
+  color: var(--snow);
+}
+
+/* ─── VENNER ADMIN ───────────────────────────────────────────────────────────── */
 .venner-layout {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 1.25rem;
   max-width: 900px;
 }
 
 .venner-seksjon {
-  background: white;
-  border-radius: 12px;
-  padding: 1.25rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  min-width: 260px;
+  background: var(--bg2);
+  border-radius: var(--r-md);
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border);
+  min-width: 250px;
   flex: 1;
 }
 
-.venner-seksjon h2 {
-  font-size: 1rem;
-  color: #2e7d32;
-  margin-bottom: 0.75rem;
-  border-bottom: 2px solid #e8f5e9;
-  padding-bottom: 0.4rem;
+.venner-seksjon h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--peak);
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .søk-rad {
-  display: flex;
-  gap: 0.5rem;
   margin-bottom: 0.75rem;
 }
 
 .søk-rad input {
-  flex: 1;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 0.9rem;
+  width: 100%;
+  padding: 0.58rem 0.85rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--snow);
+  font-family: var(--font);
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.15s;
 }
+
+.søk-rad input:focus { border-color: var(--lichen); }
+.søk-rad input::placeholder { color: var(--text-3); }
 
 .venn-rad {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
   gap: 0.5rem;
 }
 
 .venn-rad:last-child { border-bottom: none; }
 
 .venn-navn {
-  font-size: 0.95rem;
-  color: #333;
+  font-size: 0.88rem;
+  color: var(--peak);
 }
 
 .venn-knapper {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
+/* ─── BASE BUTTON ────────────────────────────────────────────────────────────── */
 button {
   padding: 0.4rem 0.75rem;
-  border: none;
-  border-radius: 6px;
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
   cursor: pointer;
-  font-size: 0.85rem;
-  transition: opacity 0.15s;
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: all 0.15s;
 }
 
-button:disabled { opacity: 0.5; cursor: default; }
+button:disabled { opacity: 0.4; cursor: default; }
 
 .btn-aksepter {
-  background: #2e7d32;
-  color: white;
+  background: rgba(61,94,53,0.45);
+  color: var(--fern);
+  border-color: rgba(79,115,68,0.35);
 }
+
+.btn-aksepter:hover { background: rgba(61,94,53,0.7); color: var(--snow); }
 
 .btn-avvis {
-  background: #e53935;
-  color: white;
+  background: var(--red-soft);
+  color: #e07070;
+  border-color: rgba(180,50,50,0.3);
 }
+
+.btn-avvis:hover { background: rgba(180,50,50,0.35); }
 
 .btn-legg-til {
-  background: #1565c0;
-  color: white;
+  background: var(--blue-soft);
+  color: var(--blue-text);
+  border-color: rgba(40,80,150,0.35);
 }
 
+.btn-legg-til:hover { background: rgba(40,80,150,0.4); }
+
 .btn-sendt {
-  background: #aaa;
-  color: white;
+  background: rgba(255,255,255,0.06);
+  color: var(--text-3);
+  border-color: var(--border);
+  cursor: default;
 }
 
 .ingen, .laster {
-  color: #888;
-  font-size: 0.9rem;
+  color: var(--text-3);
+  font-size: 0.85rem;
   padding: 0.5rem 0;
 }
 
 .ingen-turer {
-  color: #888;
-  padding: 1.5rem;
-  font-size: 1rem;
+  color: var(--text-3);
+  padding: 2.5rem 0 1.5rem;
+  font-size: 0.95rem;
 }
 
-.feil {
-  color: #c62828;
-  font-size: 0.9rem;
-}
+.feil { color: #e07070; font-size: 0.85rem; }
 
-/* ─── LOGIN ─────────────────────────────────────────────────────── */
-select, input {
-  padding: 0.5rem;
-  margin: 0.2rem;
-  font-size: 1rem;
-}
-
-#loginForm { display: block; }
-#registerForm { display: none; }
-
-.loginRegBtn {
-  padding: 0.5rem;
-  font-size: 1rem;
-  background-color: lightgrey;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-top: 1em;
-}
-
-/* ─── NYTT FJELL SKJEMA ──────────────────────────────────────────── */
+/* ─── FORM WRAPPER ───────────────────────────────────────────────────────────── */
 .skjema-wrapper {
-  background: white;
-  border-radius: 12px;
+  background: var(--bg2);
+  border-radius: var(--r-lg);
   padding: 2rem;
-  max-width: 500px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
-
-.skjema-wrapper h2 {
-  font-size: 1.2rem;
-  color: #2e7d32;
-  margin-bottom: 1.25rem;
-  border-bottom: 2px solid #e8f5e9;
-  padding-bottom: 0.5rem;
+  max-width: 480px;
+  border: 1px solid var(--border);
 }
 
 .skjema-gruppe {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 1rem;
+  gap: 5px;
+  margin-bottom: 1.1rem;
 }
 
 .skjema-gruppe label {
-  font-size: 0.85rem;
-  font-weight: bold;
-  color: #444;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-2);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
 }
 
 .skjema-gruppe input,
 .skjema-gruppe select,
 .skjema-gruppe textarea {
-  padding: 0.55rem 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 7px;
-  font-size: 0.95rem;
-  font-family: inherit;
-  transition: border-color 0.2s;
+  padding: 0.65rem 0.9rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--snow);
+  font-family: var(--font);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
   width: 100%;
+  -webkit-appearance: none;
 }
 
 .skjema-gruppe input:focus,
 .skjema-gruppe select:focus,
 .skjema-gruppe textarea:focus {
-  outline: none;
-  border-color: #2e7d32;
+  border-color: var(--lichen);
+  background: var(--bg4);
+}
+
+.skjema-gruppe input::placeholder,
+.skjema-gruppe textarea::placeholder {
+  color: var(--text-3);
+}
+
+.skjema-gruppe select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239ab890' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 2rem;
+}
+
+.skjema-gruppe select option {
+  background: var(--bg3);
+  color: var(--snow);
 }
 
 .skjema-gruppe textarea {
   resize: vertical;
+  line-height: 1.5;
 }
 
 .btn-lagre {
-  background: #2e7d32;
-  color: white;
-  padding: 0.6rem 1.5rem;
-  border-radius: 7px;
-  font-size: 1rem;
+  background: var(--moss);
+  color: var(--snow);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--r-sm);
+  font-family: var(--font);
+  font-size: 0.92rem;
+  font-weight: 600;
   margin-top: 0.5rem;
   width: 100%;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  letter-spacing: 0.02em;
 }
 
-.btn-lagre:hover {
-  background: #1b5e20;
-}
+.btn-lagre:hover { background: var(--lichen); }
+.btn-lagre:active { transform: scale(0.99); }
 
 .skjema-melding {
-  padding: 0.65rem 1rem;
-  border-radius: 7px;
-  font-size: 0.9rem;
+  padding: 0.7rem 1rem;
+  border-radius: var(--r-sm);
+  font-size: 0.86rem;
   margin-bottom: 1rem;
 }
 
 .skjema-melding.suksess {
-  background: #e8f5e9;
-  color: #1b5e20;
-  border: 1px solid #a5d6a7;
+  background: rgba(61,94,53,0.2);
+  color: var(--fern);
+  border: 1px solid rgba(79,115,68,0.35);
 }
 
 .skjema-melding.feil {
-  background: #ffebee;
-  color: #b71c1c;
-  border: 1px solid #ef9a9a;
+  background: var(--red-soft);
+  color: #e07070;
+  border: 1px solid rgba(180,50,50,0.3);
 }
 
-/* ─── NYTT OMRÅDE ────────────────────────────────────────────────── */
+/* ─── AREA ROW ───────────────────────────────────────────────────────────────── */
 .omraade-rad {
   display: flex;
   gap: 0.5rem;
   align-items: center;
 }
 
-.omraade-rad select {
-  flex: 1;
-}
+.omraade-rad select { flex: 1; }
 
 .btn-nytt-omraade {
-  background: #e8f5e9;
-  color: #2e7d32;
-  border: 1px solid #a5d6a7;
-  border-radius: 7px;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.85rem;
+  background: var(--bg3);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 0.58rem 0.85rem;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 500;
   white-space: nowrap;
   cursor: pointer;
+  transition: all 0.15s;
 }
 
 .btn-nytt-omraade:hover {
-  background: #c8e6c9;
+  background: var(--bg4);
+  color: var(--snow);
+  border-color: var(--border2);
 }
 
 #nytt-omraade-felt {
-  flex-direction: column;
-  gap: 0.4rem;
-  background: #f9fbe7;
-  border: 1px solid #dcedc8;
-  border-radius: 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
   padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#nytt-omraade-felt input,
+#nytt-omraade-felt textarea {
+  padding: 0.6rem 0.85rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--snow);
+  font-family: var(--font);
+  font-size: 0.88rem;
+  outline: none;
+  width: 100%;
+}
+
+#nytt-omraade-felt input:focus,
+#nytt-omraade-felt textarea:focus {
+  border-color: var(--lichen);
 }
 
 .btn-lagre-omraade {
-  background: #558b2f;
-  color: white;
-  padding: 0.45rem 1rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  align-self: flex-start;
-}
-
-.btn-lagre-omraade:hover {
-  background: #33691e;
-}
-
-/* ─── LOGG TUR KNAPP PÅ KORT ────────────────────────────────────── */
-.btn-logg-tur {
-  background: #e8f5e9;
-  color: #2e7d32;
-  border: 1px solid #a5d6a7;
-  border-radius: 6px;
-  padding: 0.4rem 0.75rem;
+  background: rgba(61,94,53,0.4);
+  color: var(--fern);
+  padding: 0.5rem 1rem;
+  border-radius: var(--r-sm);
+  font-family: var(--font);
   font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid rgba(79,115,68,0.3);
   cursor: pointer;
-  margin-top: 4px;
-  width: 100%;
-  text-align: center;
+  align-self: flex-start;
+  transition: all 0.15s;
 }
 
-.btn-logg-tur:hover {
-  background: #c8e6c9;
-}
+.btn-lagre-omraade:hover { background: rgba(61,94,53,0.65); color: var(--snow); }
 
-/* ─── MODAL ──────────────────────────────────────────────────────── */
+/* ─── MODAL ───────────────────────────────────────────────────────────────────── */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.72);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 200;
 }
 
-.modal-overlay.hidden {
-  display: none;
-}
+.modal-overlay.hidden { display: none !important; }
 
 .modal {
-  background: white;
-  border-radius: 14px;
+  background: var(--bg2);
+  border-radius: var(--r-xl);
   padding: 2rem;
   width: 90%;
   max-width: 420px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.65);
   position: relative;
+  border: 1px solid var(--border2);
 }
 
 .modal h2 {
-  font-size: 1.1rem;
-  color: #2e7d32;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--snow);
   margin-bottom: 0.25rem;
+  letter-spacing: -0.01em;
 }
 
 .modal-fjellnavn {
-  font-weight: bold;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  color: #333;
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 1.25rem;
+  color: var(--fern);
 }
 
 .modal-lukk {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: none;
-  border: none;
-  font-size: 1.1rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
   cursor: pointer;
-  color: #888;
-  padding: 0.2rem 0.5rem;
+  color: var(--text-2);
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-family: var(--font);
+  transition: all 0.15s;
+  width: auto;
 }
 
 .modal-lukk:hover {
-  color: #333;
+  background: var(--bg4);
+  color: var(--snow);
 }
+
+/* Inside modal, use same form styles */
+.modal .skjema-gruppe input,
+.modal .skjema-gruppe select,
+.modal .skjema-gruppe textarea {
+  background: var(--bg3);
+}
+
+/* ─── LOGIN PAGE ─────────────────────────────────────────────────────────────── */
+select, input { color-scheme: dark; }
+
+/* login.html uses these directly */
+.login-body {
+  background: var(--bg);
+  display: flex;
+  min-height: 100vh;
+}
+
+#loginForm { display: block; }
+#registerForm { display: none; }
+
+.loginRegBtn {
+  padding: 0.5rem 1rem;
+  font-size: 0.88rem;
+  background: var(--bg3);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  margin-top: 1em;
+  border-radius: var(--r-sm);
+  font-family: var(--font);
+  transition: all 0.15s;
+}
+
+.loginRegBtn:hover {
+  background: var(--bg4);
+  color: var(--snow);
+}
+
+/* ─── CRUD KNAPPER ─────────────────────────────────────────────────────────── */
+.crud-knapper {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.btn-rediger-tur {
+  flex: 1;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  background: var(--bg3);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.15s;
+}
+.btn-rediger-tur:hover { background: var(--bg4); color: var(--snow); }
+
+.btn-slett-tur {
+  flex: 1;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  background: #3a1a1a;
+  color: #e88;
+  border: 1px solid #5a2a2a;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.15s;
+}
+.btn-slett-tur:hover { background: #5a2020; color: #faa; }
+
+.fjell-rad small { color: var(--text-2); font-size: 0.8rem; }
