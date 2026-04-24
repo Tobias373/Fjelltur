@@ -67,19 +67,35 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
+    const { username, password, epost } = req.body;
+
+    if (!username || !password || !epost) {
+        return res.status(400).json({ error: 'Brukernavn, passord og e-post er påkrevd' });
+    }
+    if (username.length < 3) {
+        return res.status(400).json({ error: 'Brukernavn må være minst 3 tegn' });
+    }
+    if (password.length < 6) {
+        return res.status(400).json({ error: 'Passord må være minst 6 tegn' });
+    }
+
+    const existing = db.prepare('SELECT id FROM person WHERE brukernavn = ? OR epost = ?').get(username, epost);
+    if (existing) {
+        return res.status(409).json({ error: 'Brukernavn eller e-post er allerede i bruk' });
+    }
+
     try {
-        const user = addUser(req.body.username, req.body.password, req.body.epost);
+        const user = addUser(username, password, epost);
         if (user) {
             req.session.loggedIn = true;
             req.session.username = user.brukernavn;
             req.session.userid = user.brukerid;
-            // FIX: redirect til appen etter registrering (ikke bare send true/false)
             return res.redirect('/');
         }
-        return res.sendFile(path.join(__dirname, "public/login.html"));
+        return res.status(500).json({ error: 'Kunne ikke opprette bruker' });
     } catch (error) {
         console.error(error);
-        return res.sendFile(path.join(__dirname, "public/login.html"));
+        return res.status(500).json({ error: 'Serverfeil ved registrering' });
     }
 });
 
