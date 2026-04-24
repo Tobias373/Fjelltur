@@ -190,22 +190,18 @@
         <button type="submit" class="submit-btn">Logg inn</button>
       </form>
 
-      <form id="registerForm" class="form-panel" action="/register" method="POST">
+      <form id="registerForm" class="form-panel" onsubmit="registrer(event)">
         <div class="field">
           <label>Brukernavn</label>
-          <input type="text" name="username" placeholder="Velg brukernavn" autocomplete="username">
+          <input type="text" id="reg_username" placeholder="Velg brukernavn" autocomplete="username">
         </div>
         <div class="field">
           <label>Passord</label>
-          <input type="password" name="password" placeholder="••••••••" autocomplete="new-password">
+          <input type="password" id="reg_password" placeholder="••••••••" autocomplete="new-password">
         </div>
         <div class="field">
           <label>E-post</label>
-          <input type="email" name="epost" placeholder="din@epost.no" autocomplete="email">
-        </div>
-        <div class="field">
-          <label>Mobil</label>
-          <input type="tel" name="mobile" placeholder="+47 000 00 000" autocomplete="tel">
+          <input type="email" id="reg_epost" placeholder="din@epost.no" autocomplete="email">
         </div>
         <button type="submit" class="submit-btn">Opprett konto</button>
       </form>
@@ -220,6 +216,40 @@
       document.getElementById('registerForm').classList.toggle('active', fane === 'register');
       document.getElementById('btnLogin').classList.toggle('active', fane === 'login');
       document.getElementById('btnRegister').classList.toggle('active', fane === 'register');
+      document.getElementById('loginFeedback').textContent = '';
+    }
+
+    async function registrer(e) {
+      e.preventDefault();
+      const feedback = document.getElementById('loginFeedback');
+      feedback.textContent = '';
+
+      const username = document.getElementById('reg_username').value.trim();
+      const password = document.getElementById('reg_password').value;
+      const epost    = document.getElementById('reg_epost').value.trim();
+
+      try {
+        const res = await fetch('/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password, epost })
+        });
+
+        if (res.redirected) {
+          window.location.href = res.url;
+          return;
+        }
+
+        if (res.ok) {
+          window.location.href = '/';
+          return;
+        }
+
+        const data = await res.json();
+        feedback.textContent = data.error || 'Kunne ikke opprette bruker.';
+      } catch (err) {
+        feedback.textContent = 'Nettverksfeil – prøv igjen.';
+      }
     }
   </script>
 </body>
