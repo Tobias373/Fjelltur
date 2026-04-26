@@ -67,9 +67,9 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-    const { username, password, epost } = req.body;
+    const { username, password, epost} = req.body;
 
-    if (!username || !password || !epost) {
+    if (!username || !password) {
         return res.status(400).json({ error: 'Brukernavn, passord og e-post er påkrevd' });
     }
     if (username.length < 3) {
@@ -85,7 +85,7 @@ app.post('/register', (req, res) => {
     }
 
     try {
-        const user = addUser(username, password, epost);
+        const user = addUser(username, password, );
         if (user) {
             req.session.loggedIn = true;
             req.session.username = user.brukernavn;

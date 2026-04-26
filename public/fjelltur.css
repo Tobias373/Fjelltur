@@ -710,9 +710,6 @@ select, input { color-scheme: dark; }
   min-height: 100vh;
 }
 
-#loginForm { display: block; }
-#registerForm { display: none; }
-
 .loginRegBtn {
   padding: 0.5rem 1rem;
   font-size: 0.88rem;
