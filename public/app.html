@@ -122,7 +122,7 @@
             </select>
             <button type="button" class="btn-nytt-omraade" onclick="toggleNyttOmraade()">+ Nytt</button>
           </div>
-          <div id="nytt-omraade-felt" style="margin-top:0.5rem; display:none;">
+          <div id="nytt-omraade-felt" class="nytt-omraade-felt hidden">
             <input type="text" id="nytt-omraade-navn" placeholder="Navn på nytt område">
             <textarea id="nytt-omraade-beskrivelse" rows="2" placeholder="Beskrivelse (valgfritt)"></textarea>
             <button type="button" class="btn-lagre-omraade" onclick="lagreNyttOmraade()">Lagre område</button>
@@ -139,7 +139,7 @@
         <button class="btn-lagre" onclick="lagreNyttFjell()">Lagre fjell</button>
       </div>
 
-      <div class="fane-header" style="margin-top:2rem;">
+      <div class="fane-header fane-header--margin-top">
         <h2 class="fane-tittel">Eksisterende fjell</h2>
       </div>
       <div id="fjell-liste-container" class="venn-liste"></div>

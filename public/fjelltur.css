@@ -764,3 +764,165 @@ select, input { color-scheme: dark; }
 .btn-slett-tur:hover { background: #5a2020; color: #faa; }
 
 .fjell-rad small { color: var(--text-2); font-size: 0.8rem; }
+
+
+/* ─── LOGIN PAGE ─────────────────────────────────────────────────────────────── */
+body.login-body {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  padding: 2rem 1rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+}
+
+.login-brand {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.login-brand-icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(61,94,53,0.2);
+  border-radius: 14px;
+  border: 1px solid rgba(79,115,68,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.login-brand h1 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--snow);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3rem;
+}
+
+.login-brand p {
+  font-size: 0.82rem;
+  color: var(--text-2);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tab-row {
+  display: flex;
+  background: var(--bg2);
+  border-radius: 10px;
+  padding: 3px;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 0.55rem;
+  border: none;
+  background: none;
+  color: var(--text-2);
+  font-family: var(--font);
+  font-size: 0.88rem;
+  font-weight: 400;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.tab-btn.active {
+  background: var(--moss);
+  color: var(--snow);
+  font-weight: 600;
+}
+
+.form-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.75rem;
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.field label {
+  display: block;
+  font-size: 0.73rem;
+  font-weight: 600;
+  color: var(--text-2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+}
+
+.field input {
+  width: 100%;
+  padding: 0.72rem 0.9rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--snow);
+  font-family: var(--font);
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.field input:focus {
+  border-color: var(--lichen);
+  background: var(--bg4);
+}
+
+.field input::placeholder { color: var(--text-3); }
+
+.submit-btn {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  background: var(--moss);
+  border: none;
+  border-radius: var(--r-sm);
+  color: var(--snow);
+  font-family: var(--font);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  letter-spacing: 0.02em;
+}
+
+.submit-btn:hover  { background: var(--lichen); }
+.submit-btn:active { transform: scale(0.99); }
+
+.form-panel         { display: none; }
+.form-panel.active  { display: block; }
+
+#loginFeedback {
+  margin-top: 0.9rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--r-sm);
+  font-size: 0.84rem;
+  background: rgba(192,122,64,0.12);
+  border: 1px solid rgba(192,122,64,0.25);
+  color: #d4946a;
+  display: none;
+}
+
+#loginFeedback:not(:empty) { display: block; }
+
+/* ─── APP PAGE EXTRAS ────────────────────────────────────────────────────────── */
+.nytt-omraade-felt {
+  margin-top: 0.5rem;
+}
+
+.fane-header--margin-top {
+  margin-top: 2rem;
+}
